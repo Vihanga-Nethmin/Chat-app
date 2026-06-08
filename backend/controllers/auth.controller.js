@@ -1,5 +1,5 @@
 import User from "../models/user.model.js";
-import bcryptjs from "bcryptjs";
+import bcrypt from "bcryptjs";
 
 
 export const signup= async(req,res) =>{
@@ -14,7 +14,9 @@ export const signup= async(req,res) =>{
             return res.status(400).json({error:"Username already exists"})
         }
 
-           const salt = await bcryptjs.genSalt(10);
+           const salt = await bcrypt.genSalt(10);
+           const hashedPassword = await bcrypt.hash(password,salt);
+
 
         const boyProfilePic = `https://api.dicebear.com/7.x/avataaars/svg?seed=${username}&accessories=blank&top=shortHair`;
         const girlProfilePic = `https://api.dicebear.com/7.x/avataaars/svg?seed=${username}&accessories=blank&top=longHair`;
@@ -22,7 +24,7 @@ export const signup= async(req,res) =>{
     const newUser = new User({
         fullName,
         username,
-        password,
+        password :hashedPassword,
         gender,
         profilePic: gender === "male" ? boyProfilePic : girlProfilePic
     })
