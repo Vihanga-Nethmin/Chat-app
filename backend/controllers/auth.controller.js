@@ -29,14 +29,17 @@ export const signup= async(req,res) =>{
         profilePic: gender === "male" ? boyProfilePic : girlProfilePic
     })
 
-    await newUser.save();
+    if(newUser){
+        await newUser.save();
     res.status(201).json({
         _id: newUser._id,
         fullName: newUser.fullName,
         username:newUser.username,
         profilePic:newUser.profilePic
     })
-
+    } else{
+        res.status(500).json({error:"Internal Server Error"})
+    }
     }
     catch(error){
         console.log("error in signup controller",error.message);
