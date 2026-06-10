@@ -5,7 +5,7 @@ const LogoutButton = () => {
   const { loading, logout } = useLogout();
 
   return (
-    <div className='mt-auto'>
+    <div className='mt-auto p-2'>
       {loading ? (
         <span className='loading loading-spinner'></span>
       ) : (
