@@ -2,11 +2,12 @@ import { useSocketContext } from "../../context/SocketContext";
 import useConversation from "../../zustand/userConversation";
 
 const Conversation = ({ conversation, lastIdx, emoji }) => {
-  const { selectedConversation, setSelectedConversation } = useConversation();
+  const { selectedConversation, setSelectedConversation, unreadCounts } = useConversation();
 
   const isSelected = selectedConversation?._id === conversation._id;
   const {onlineUsers}=useSocketContext();
   const isOnline =onlineUsers.includes(conversation._id)
+  const unreadCount = unreadCounts[conversation._id] || 0;
 
 
   return (
@@ -30,9 +31,16 @@ const Conversation = ({ conversation, lastIdx, emoji }) => {
         </div>
 
         <div className='flex flex-col flex-1'>
-          <div className='flex gap-3 justify-between'>
+          <div className='flex gap-3 justify-between items-center'>
             <p className='font-bold text-gray-200'>{conversation.fullName}</p>
-            <span className='text-xl'>{emoji}</span>
+            <div className='flex items-center gap-2'>
+              {unreadCount > 0 && (
+                <span className='badge bg-sky-500 text-white border-none'>
+                  {unreadCount}
+                </span>
+              )}
+              <span className='text-xl'>{emoji}</span>
+            </div>
           </div>
         </div>
       </div>
