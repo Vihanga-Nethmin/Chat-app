@@ -20,7 +20,12 @@ const useSendMessage = () => {
             const data = await res.json()
             if(data.error) throw new Error(data.error)
 
-                setMessages([...messages,data])
+            // When chatting with Gemini, backend returns [userMessage, aiMessage]
+            if (Array.isArray(data)) {
+                setMessages([...messages, ...data])
+            } else {
+                setMessages([...messages, data])
+            }
 
 
         } catch (error) {
