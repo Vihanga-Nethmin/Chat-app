@@ -1,4 +1,9 @@
-const GenderCheckbox = ({ onCheckboxChange, selectedGender }) => {
+interface GenderCheckboxProps {
+  onCheckboxChange: (gender: string) => void;
+  selectedGender: string;
+}
+
+const GenderCheckbox = ({ onCheckboxChange, selectedGender }: GenderCheckboxProps) => {
   return (
     <div className='flex'>
       <div className='form-control'>

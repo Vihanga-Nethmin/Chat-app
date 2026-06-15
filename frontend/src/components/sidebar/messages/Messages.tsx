@@ -8,7 +8,7 @@ const Messages = () => {
     const { messages, loading } = useGetMessages();
     useListenMessages();
 
-    const lastMessageRef = useRef();
+    const lastMessageRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         lastMessageRef.current?.scrollIntoView({ behavior: "smooth" });

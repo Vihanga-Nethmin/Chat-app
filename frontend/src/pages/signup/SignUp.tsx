@@ -14,11 +14,11 @@ const SignUp = () => {
 
   const { loading, signup } = useSignup()
 
-  const handleCheckboxChange = (gender) => {
-    setInputs({...inputs, gender});
+  const handleCheckboxChange = (gender: string) => {
+    setInputs({ ...inputs, gender });
   }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     await signup(inputs)
   }
@@ -37,7 +37,7 @@ const SignUp = () => {
             </label>
             <input type='text' placeholder='John Doe' className='w-full input input-bordered h-10'
               value={inputs.fullName}
-              onChange={(e) => setInputs({...inputs, fullName: e.target.value})}
+              onChange={(e) => setInputs({ ...inputs, fullName: e.target.value })}
             />
           </div>
 
@@ -47,7 +47,7 @@ const SignUp = () => {
             </label>
             <input type='text' placeholder='johndoe' className='w-full input input-bordered h-10'
               value={inputs.username}
-              onChange={(e) => setInputs({...inputs, username: e.target.value})}
+              onChange={(e) => setInputs({ ...inputs, username: e.target.value })}
             />
           </div>
 
@@ -57,7 +57,7 @@ const SignUp = () => {
             </label>
             <input type='password' placeholder='Enter Password' className='w-full input input-bordered h-10'
               value={inputs.password}
-              onChange={(e) => setInputs({...inputs, password: e.target.value})}
+              onChange={(e) => setInputs({ ...inputs, password: e.target.value })}
             />
           </div>
 
@@ -67,7 +67,7 @@ const SignUp = () => {
             </label>
             <input type='password' placeholder='Confirm Password' className='w-full input input-bordered h-10'
               value={inputs.confirmPassword}
-              onChange={(e) => setInputs({...inputs, confirmPassword: e.target.value})}
+              onChange={(e) => setInputs({ ...inputs, confirmPassword: e.target.value })}
             />
           </div>
 

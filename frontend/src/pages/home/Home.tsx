@@ -1,4 +1,4 @@
-// Home.jsx - correct path
+// Home.tsx - correct path
 import MessageContainer from "../../components/sidebar/messages/MessageContainer";
 import Sidebar from "../../components/sidebar/Sidebar";
 

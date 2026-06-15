@@ -1,16 +1,21 @@
 import { extractTime } from "../../../../utills/extractTime";
 import { useAuthContext } from "../../../context/AuthContext";
 import useConversation from "../../../zustand/userConversation";
+import { Message as MessageType } from "../../../types";
 
-const Message = ({ message }) => {
+interface MessageProps {
+    message: MessageType;
+}
+
+const Message = ({ message }: MessageProps) => {
     const { authUser } = useAuthContext();
     const { selectedConversation } = useConversation();
     const formattedTime = extractTime(message.createdAt)
-    const fromMe = message.senderId === authUser._id;
+    const fromMe = message.senderId === authUser?._id;
     const chatClassName = fromMe ? "chat-end" : "chat-start";
-    const profilePic = fromMe ? authUser.profilePic : selectedConversation?.profilePic;
+    const profilePic = fromMe ? authUser?.profilePic : selectedConversation?.profilePic;
     const bubbleBgColor = fromMe ? "bg-blue-500" : "";
-    const shakeClass= message.shouldShake ? "shake":""
+    const shakeClass = message.shouldShake ? "shake" : ""
 
     return (
         <div className={`chat ${chatClassName}`}>
@@ -20,8 +25,8 @@ const Message = ({ message }) => {
                         alt='profile'
                         src={profilePic}
                         onError={(e) => {
-                            e.target.onerror = null;
-                            e.target.src = `https://ui-avatars.com/api/?name=${fromMe ? authUser.fullName : selectedConversation?.fullName}&background=random`;
+                            e.currentTarget.onerror = null;
+                            e.currentTarget.src = `https://ui-avatars.com/api/?name=${fromMe ? authUser?.fullName : selectedConversation?.fullName}&background=random`;
                         }}
                     />
                 </div>
