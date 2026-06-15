@@ -1,8 +1,9 @@
-# 💬 Real-Time Chat App (MERN)
+# 💬 Real-Time Chat App (MERN + TypeScript)
 
-A full-stack real-time chat application built with the **MERN stack** (MongoDB, Express, React, Node.js), featuring live messaging via **Socket.IO**, JWT-based authentication, online status indicators, unread message notifications, and a built-in **Gemini AI chatbot**.
+A full-stack real-time chat application built with the **MERN stack** and **TypeScript**, featuring live messaging via **Socket.IO**, JWT-based authentication, online status indicators, unread message notifications, and a built-in **Gemini AI chatbot**.
 
 ![status](https://img.shields.io/badge/status-in%20development-yellow)
+![typescript](https://img.shields.io/badge/TypeScript-100%25-blue)
 
 ---
 
@@ -15,6 +16,7 @@ A full-stack real-time chat application built with the **MERN stack** (MongoDB, 
 - 🔍 **Search** — quickly find a conversation by name
 - 🤖 **Gemini AI chatbot** — chat with Google's Gemini AI directly inside the app, just like any other contact
 - 🎨 **Modern UI** — built with Tailwind CSS and DaisyUI
+- 🟦 **Fully typed** — both the Express/Mongoose backend and the React frontend are written in TypeScript
 
 ---
 
@@ -22,6 +24,7 @@ A full-stack real-time chat application built with the **MERN stack** (MongoDB, 
 
 **Frontend**
 - React 19 + Vite
+- TypeScript
 - Tailwind CSS + DaisyUI
 - Zustand (state management)
 - React Router
@@ -30,6 +33,7 @@ A full-stack real-time chat application built with the **MERN stack** (MongoDB, 
 
 **Backend**
 - Node.js + Express 5
+- TypeScript (run via `tsx`)
 - MongoDB + Mongoose
 - Socket.IO
 - JWT (`jsonwebtoken`) + `bcryptjs`
@@ -42,26 +46,31 @@ A full-stack real-time chat application built with the **MERN stack** (MongoDB, 
 ```
 Chat-app/
 ├── backend/
-│   ├── constants/        # Shared constants (e.g. AI bot ID)
-│   ├── controllers/       # Route logic (auth, messages, users)
-│   ├── db/                 # MongoDB connection
-│   ├── middleware/         # Auth middleware
-│   ├── models/             # Mongoose schemas
-│   ├── routes/             # API routes
-│   ├── seed/                # DB seed scripts (Gemini AI user)
-│   ├── socket/              # Socket.IO setup
-│   ├── utils/                # Helper functions (token, Gemini API)
-│   └── server.js
+│   ├── constants/         # Shared constants (e.g. AI bot ID)
+│   ├── controllers/        # Route logic (auth, messages, users)
+│   ├── db/                  # MongoDB connection
+│   ├── middleware/          # Auth middleware
+│   ├── models/              # Mongoose schemas + TS interfaces
+│   ├── routes/               # API routes
+│   ├── seed/                  # DB seed scripts (Gemini AI user)
+│   ├── socket/                 # Socket.IO setup
+│   ├── types/                   # Global type declarations (Express Request augmentation)
+│   ├── utils/                    # Helper functions (token, Gemini API)
+│   └── server.ts
 ├── frontend/
 │   ├── src/
 │   │   ├── components/      # UI components (sidebar, messages, etc.)
 │   │   ├── context/           # Auth & Socket context
-│   │   ├── hooks/              # Custom hooks
-│   │   ├── pages/               # Login, Signup, Home
-│   │   ├── zustand/              # Global state store
-│   │   └── App.jsx
-│   └── vite.config.js
-├── .env
+│   │   ├── hooks/               # Custom hooks
+│   │   ├── pages/                # Login, Signup, Home
+│   │   ├── types/                  # Shared TS interfaces (User, Message)
+│   │   ├── zustand/                  # Global state store
+│   │   ├── App.tsx
+│   │   └── main.tsx
+│   ├── utills/               # Emoji & time-formatting helpers
+│   ├── tsconfig.json
+│   └── vite.config.ts
+├── tsconfig.json
 └── package.json
 ```
 
@@ -132,9 +141,25 @@ The "Gemini AI" contact appears automatically in the sidebar for every user. Mes
 
 ---
 
+## ✅ Type Checking
+
+Run a full TypeScript check across the backend:
+```bash
+npm run build:server
+```
+
+Run a full TypeScript check across the frontend:
+```bash
+cd frontend
+npm run type-check
+```
+
+---
+
 ## 🗺️ Roadmap
 
-- [ ] Convert frontend to TypeScript
+- [x] Convert backend to TypeScript
+- [x] Convert frontend to TypeScript
 - [ ] Add Redux for state management
 - [ ] Role-based authorization
 - [ ] "Gemini is typing..." indicator
