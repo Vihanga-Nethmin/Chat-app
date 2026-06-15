@@ -1,12 +1,19 @@
 import { useSocketContext } from "../../context/SocketContext";
 import useConversation from "../../zustand/userConversation";
+import { User } from "../../types";
 
-const Conversation = ({ conversation, lastIdx, emoji }) => {
+interface ConversationProps {
+  conversation: User;
+  lastIdx: boolean;
+  emoji: string;
+}
+
+const Conversation = ({ conversation, lastIdx, emoji }: ConversationProps) => {
   const { selectedConversation, setSelectedConversation, unreadCounts } = useConversation();
 
   const isSelected = selectedConversation?._id === conversation._id;
-  const {onlineUsers}=useSocketContext();
-  const isOnline =onlineUsers.includes(conversation._id)
+  const { onlineUsers } = useSocketContext();
+  const isOnline = onlineUsers.includes(conversation._id)
   const unreadCount = unreadCounts[conversation._id] || 0;
 
 
@@ -23,8 +30,8 @@ const Conversation = ({ conversation, lastIdx, emoji }) => {
               src={conversation.profilePic}
               alt='user avatar'
               onError={(e) => {
-                e.target.onerror = null;
-                e.target.src = `https://ui-avatars.com/api/?name=${conversation.fullName}&background=random`;
+                e.currentTarget.onerror = null;
+                e.currentTarget.src = `https://ui-avatars.com/api/?name=${conversation.fullName}&background=random`;
               }}
             />
           </div>

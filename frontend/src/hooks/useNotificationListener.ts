@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import toast from 'react-hot-toast';
 import { useSocketContext } from '../context/SocketContext';
 import useConversation from '../zustand/userConversation';
+import { Message } from '../types';
 import notificationSound from "../assets/sounds/notification.mp3";
 
 const useNotificationListener = () => {
@@ -9,7 +10,7 @@ const useNotificationListener = () => {
   const { selectedConversation, incrementUnread } = useConversation();
 
   useEffect(() => {
-    const handleNewMessage = (newMessage) => {
+    const handleNewMessage = (newMessage: Message) => {
       // Skip if the message belongs to the chat currently open
       if (newMessage.senderId === selectedConversation?._id) return;
 
@@ -23,7 +24,7 @@ const useNotificationListener = () => {
 
     socket?.on("newMessage", handleNewMessage);
 
-    return () => socket?.off("newMessage", handleNewMessage);
+    return () => { socket?.off("newMessage", handleNewMessage); }
   }, [socket, selectedConversation, incrementUnread]);
 };
 

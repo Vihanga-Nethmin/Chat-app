@@ -1,6 +1,16 @@
 import { create } from "zustand";
+import { User, Message } from "../types";
 
-const useConversation = create((set) => ({
+interface ConversationState {
+    selectedConversation: User | null;
+    setSelectedConversation: (selectedConversation: User | null) => void;
+    messages: Message[];
+    setMessages: (messages: Message[]) => void;
+    unreadCounts: Record<string, number>;
+    incrementUnread: (senderId: string) => void;
+}
+
+const useConversation = create<ConversationState>((set) => ({
     selectedConversation: null,
     setSelectedConversation: (selectedConversation) => {
         set((state) => {

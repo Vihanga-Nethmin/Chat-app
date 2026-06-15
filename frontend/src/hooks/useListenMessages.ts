@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 
 import { useSocketContext } from '../context/SocketContext'
 import useConversation from '../zustand/userConversation'
+import { Message } from '../types'
 import notificationSound from "../assets/sounds/notification.mp3";
 
 const useListenMessages = () => {
@@ -9,7 +10,7 @@ const useListenMessages = () => {
   const { messages, setMessages, selectedConversation } = useConversation()
 
   useEffect(() => {
-    const handleNewMessage = (newMessage) => {
+    const handleNewMessage = (newMessage: Message) => {
         if (newMessage.senderId !== selectedConversation?._id) return;
 
         newMessage.shouldShake = true;
@@ -21,7 +22,7 @@ const useListenMessages = () => {
 
     socket?.on("newMessage", handleNewMessage)
 
-    return () => socket?.off("newMessage", handleNewMessage)
+    return () => { socket?.off("newMessage", handleNewMessage) }
   }, [socket, setMessages, messages, selectedConversation])
 }
 
