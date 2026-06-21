@@ -2,8 +2,10 @@
 
 A full-stack real-time chat application built with the **MERN stack** and **TypeScript**, featuring live messaging via **Socket.IO**, JWT-based authentication, online status indicators, unread message notifications, and a built-in **Gemini AI chatbot**.
 
-![status](https://img.shields.io/badge/status-in%20development-yellow)
+![status](https://img.shields.io/badge/status-live-brightgreen)
 ![typescript](https://img.shields.io/badge/TypeScript-100%25-blue)
+
+🌐 **Live Demo:** [http://172.245.220.221/](http://172.245.220.221/)
 
 ---
 
@@ -38,6 +40,25 @@ A full-stack real-time chat application built with the **MERN stack** and **Type
 - Socket.IO
 - JWT (`jsonwebtoken`) + `bcryptjs`
 - Google Gemini API
+
+---
+
+## 🚀 Deployment
+
+### Server
+
+| Component | Details |
+|-----------|---------|
+| VPS Type | KVM Virtual Private Server (Ubuntu 22.04) |
+| Runtime | Node.js |
+| Process Manager | PM2 |
+| Reverse Proxy | Nginx |
+| Database | MongoDB |
+| Real-time Communication | Socket.IO |
+
+**Backend** is deployed on an Ubuntu 22.04 KVM VPS using Node.js + TypeScript. PM2 keeps the server running and automatically restarts it on failure. Nginx acts as a reverse proxy, forwarding HTTP traffic to the Node.js process.
+
+**Frontend** is built as a static web application (`npm run build`) and served by Nginx. It communicates with the backend through REST APIs and Socket.IO connections.
 
 ---
 
@@ -76,7 +97,7 @@ Chat-app/
 
 ---
 
-## 🚀 Getting Started
+## 🏃 Getting Started (Local Development)
 
 ### Prerequisites
 - [Node.js](https://nodejs.org/) (v18+)
@@ -160,6 +181,7 @@ npm run type-check
 
 - [x] Convert backend to TypeScript
 - [x] Convert frontend to TypeScript
+- [x] Deploy to VPS (Ubuntu 22.04 + PM2 + Nginx)
 - [ ] Add Redux for state management
 - [ ] Role-based authorization
 - [ ] "Gemini is typing..." indicator
